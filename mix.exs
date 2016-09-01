@@ -15,7 +15,8 @@ defmodule ExClockwork.Mixfile do
   # Type "mix help compile.app" for more information
   def application do
     [mod: {ExClockwork, []},
-     applications: [:logger]]
+     applications: [:logger],
+     env: [interval: 1000]]
   end
 
   # Dependencies can be Hex packages:

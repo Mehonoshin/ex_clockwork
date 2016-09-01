@@ -6,9 +6,20 @@ defmodule ExClockwork.EventHandlerServer do
   end
 
   def init(opts) do
-    #:ok = GenEvent.add_handler(EventServer, CollectorScheduler.EventHandler, self())
-    #:ok = GenEvent.add_handler(EventServer, CollectorScheduler.EventHandler2, self())
     IO.puts "Starting event handlers"
+    subscribe(schedule.handlers)
     {:ok, opts}
+  end
+
+  defp subscribe([handler | handlers]) do
+    :ok = GenEvent.add_handler(EventServer, handler, self())
+    subscribe(handlers)
+  end
+
+  defp subscribe([]) do
+  end
+
+  defp schedule do
+    Application.fetch_env!(:ex_clockwork, :schedule)
   end
 end

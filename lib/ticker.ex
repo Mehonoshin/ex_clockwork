@@ -18,6 +18,10 @@ defmodule ExClockwork.Ticker do
 
   defp schedule_tick do
     # TODO: move tick interval to config
-    Process.send_after(self(), :tick, 1000)
+    Process.send_after(self(), :tick, interval)
+  end
+
+  defp interval do
+    Application.fetch_env!(:ex_clockwork, :interval)
   end
 end
