@@ -3,6 +3,7 @@ defmodule ExClockwork.Handler do
     quote do
       import ExClockwork.Handler
       use GenEvent
+      alias ExClockwork.Numbers
 
       @periods %{
         second: 1000,
@@ -37,23 +38,11 @@ defmodule ExClockwork.Handler do
 
       defp process_tick?({time}) do
         {_, {hour, minute, second}} = :calendar.local_time()
-        "#{f(hour)}:#{f(minute)}:#{f(second)}" == time
+        "#{Numbers.f(hour)}:#{Numbers.f(minute)}:#{Numbers.f(second)}" == time
       end
 
       defp tick_interval do
         Application.fetch_env!(:ex_clockwork, :interval)
-      end
-
-      defp f(num) do
-        format_number(num)
-      end
-
-      defp format_number(num) when num < 10 do
-        "0#{num}"
-      end
-
-      defp format_number(num) when num > 9 do
-        num
       end
     end
   end
