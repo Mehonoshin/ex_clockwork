@@ -12,7 +12,7 @@ defmodule ExClockwork.Schedule do
 
   defmacro every(period, measure, module) do
     quote do
-      @handlers [unquote(module) | @handlers]
+      @handlers [{unquote(module), unquote(period), unquote(measure)} | @handlers]
     end
   end
 

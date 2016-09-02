@@ -12,7 +12,8 @@ defmodule ExClockwork.EventHandlerServer do
   end
 
   defp subscribe([handler | handlers]) do
-    :ok = GenEvent.add_handler(EventServer, handler, self())
+    {handler_module, period, measure} = handler
+    :ok = GenEvent.add_handler(EventServer, handler_module, {period, measure})
     subscribe(handlers)
   end
 
