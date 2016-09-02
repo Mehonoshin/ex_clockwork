@@ -6,7 +6,7 @@ defmodule ExClockwork.EventHandlerServer do
   end
 
   def init(opts) do
-    IO.puts "Starting event handlers"
+    IO.puts "Starting event handlers: #{inspect schedule.handlers}"
     subscribe(schedule.handlers)
     {:ok, opts}
   end
