@@ -48,7 +48,7 @@ defmodule ExClockwork.Mixfile do
       files: ["lib", "priv", "mix.exs", "README*", "readme*", "LICENSE*", "license*"],
       maintainers: ["Stanislav Mekhonoshin"],
       licenses: ["MIT"],
-      links: ["https://github.com/Mehonoshin/ex_clockwork"]
+      links: ["GitHub" => "https://github.com/Mehonoshin/ex_clockwork"]
     ]
   end
 end
