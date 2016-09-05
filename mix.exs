@@ -7,6 +7,8 @@ defmodule ExClockwork.Mixfile do
      elixir: "~> 1.3",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
+     description: description(),
+     package: package(),
      deps: deps()]
   end
 
@@ -33,5 +35,20 @@ defmodule ExClockwork.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     []
+  end
+
+  defp description do
+    """
+      This package allows you to run tasks at specified periods of time. Similar to ruby `clockwork` gem.
+    """
+  end
+
+  defp package do
+    [
+      files: ["lib", "priv", "mix.exs", "README*", "readme*", "LICENSE*", "license*"],
+      maintainers: ["Stanislav Mekhonoshin"],
+      licenses: ["MIT"],
+      links: ["https://github.com/Mehonoshin/ex_clockwork"]
+    ]
   end
 end

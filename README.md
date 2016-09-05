@@ -1,6 +1,8 @@
 # ExClockwork
 
-**TODO: Add description**
+This package allows you to run tasks at specified periods of time. Similar to ruby `clockwork` gem.
+
+Currently is under development.
 
 ## Installation
 
