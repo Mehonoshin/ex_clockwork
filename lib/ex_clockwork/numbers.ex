@@ -5,6 +5,9 @@ defmodule ExClockwork.Numbers do
   ### Examples
       iex> ExClockwork.Numbers.f(1)
       "01"
+
+      iex> ExClockwork.Numbers.f(12)
+      "12"
   """
   def f(num) do
     format_number(num)
