@@ -15,6 +15,6 @@ defmodule ExClockwork.Numbers do
   end
 
   defp format_number(num) when num > 9 do
-    num
+    "#{num}"
   end
 end

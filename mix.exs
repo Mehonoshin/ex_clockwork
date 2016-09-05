@@ -16,7 +16,10 @@ defmodule ExClockwork.Mixfile do
   def application do
     [mod: {ExClockwork, []},
      applications: [:logger],
-     env: [interval: 1000]]
+     env: [
+       interval: 1000,
+       schedule: Test.Schedule
+     ]]
   end
 
   # Dependencies can be Hex packages:
