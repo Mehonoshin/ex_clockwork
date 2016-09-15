@@ -6,8 +6,6 @@ Currently is under development.
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed as:
-
   1. Add `ex_clockwork` to your list of dependencies in `mix.exs`:
 
     ```elixir
@@ -24,3 +22,31 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
     end
     ```
 
+	3. Add `schedule.ex` file to your application, with something like this content:
+
+	```
+		defmodule MyApp.Schedule do
+			use ExClockwork.Schedule
+
+			every(2, :second, MyApp.MyEventHandler)
+		end
+	```
+
+	4. Add `my_event_handler.ex` file to your app.
+	```
+		defmodule MyApp.MyEventHandler do
+			use ExClockwork.Handler
+
+			def run do
+				# do anything here
+			end
+		end
+	```
+
+	run method of this module will be invoked every 2 seconds, as defined in schedule
+
+
+## TODO
+
+	* Add examples
+	* Add some kind of generators, to install sample schedule and handler, to prevent extra work from user
