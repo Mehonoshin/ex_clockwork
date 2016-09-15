@@ -23,8 +23,7 @@ Currently is under development.
     ```
 
 	3. Add `schedule.ex` file to your application, with something like this content:
-
-	```
+	```elixir
 		defmodule MyApp.Schedule do
 			use ExClockwork.Schedule
 
@@ -33,7 +32,7 @@ Currently is under development.
 	```
 
 	4. Add `my_event_handler.ex` file to your app.
-	```
+	```elixir
 		defmodule MyApp.MyEventHandler do
 			use ExClockwork.Handler
 
