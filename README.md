@@ -53,6 +53,5 @@ Currently is under development.
 
 
 ## TODO
-
 	* Add examples
 	* Add some kind of generators, to install sample schedule and handler, to prevent extra work from user
