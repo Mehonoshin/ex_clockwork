@@ -22,6 +22,14 @@ Currently is under development.
     end
     ```
 
+	3. Configure `ex_clockwork` application, adding to config/config.exs:
+	```elixir
+	config :ex_clockwork,
+		schedule: ExBlog.Schedule,
+		interval: 1000
+	```
+	where `schedule` is the module with your tasks definitions
+
 	3. Add `schedule.ex` file to your application, with something like this content:
 	```elixir
 		defmodule MyApp.Schedule do
