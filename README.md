@@ -22,35 +22,34 @@ Currently is under development.
     end
     ```
 
-	3. Configure `ex_clockwork` application, adding to config/config.exs:
-	```elixir
-	config :ex_clockwork,
-		schedule: ExBlog.Schedule,
-		interval: 1000
-	```
-	where `schedule` is the module with your tasks definitions
+  3. Configure `ex_clockwork` application, adding to `config/config.exs`:
+    ```elixir
+    config :ex_clockwork,
+      schedule: MyApp.Schedule,
+      interval: 1000
+    ```
+    where `schedule` is the module with your tasks definitions
 
-	3. Add `schedule.ex` file to your application, with something like this content:
-	```elixir
-		defmodule MyApp.Schedule do
-			use ExClockwork.Schedule
+  4. Add `schedule.ex` file to your application, with something like this content:
+    ```elixir
+    defmodule MyApp.Schedule do
+      use ExClockwork.Schedule
+      every(2, :second, MyApp.MyEventHandler)
+    end
+    ```
 
-			every(2, :second, MyApp.MyEventHandler)
-		end
-	```
+  5. Add `my_event_handler.ex` file to your app.
+    ```elixir
+    defmodule MyApp.MyEventHandler do
+      use ExClockwork.Handler
+      
+      def run do
+        # do anything here
+      end
+    end
+    ```
 
-	4. Add `my_event_handler.ex` file to your app.
-	```elixir
-		defmodule MyApp.MyEventHandler do
-			use ExClockwork.Handler
-
-			def run do
-				# do anything here
-			end
-		end
-	```
-
-	run method of this module will be invoked every 2 seconds, as defined in schedule
+    run method of this module will be invoked every 2 seconds, as defined in schedule
 
 
 ## TODO
