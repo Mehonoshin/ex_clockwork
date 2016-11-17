@@ -11,6 +11,9 @@ defmodule Mix.Tasks.ExClockwork.Install do
   @config_marker_end   "%% End ExClockwork Configuration %%"
 
   @config_file "config/config.exs"
+  @default_schedule_file "lib/schedule.ex"
+  @default_handlers_directory "lib/schedule_handlers"
+  @sample_hander_file "my_event_handler.ex"
 
   def run(args) do
     args
@@ -35,11 +38,36 @@ defmodule Mix.Tasks.ExClockwork.Install do
   end
 
   defp install_schedule do
-    Mix.shell.info "schedule"
+    schedule_value = """
+    defmodule #{base}.Schedule do
+      use ExClockwork.Schedule
+
+      # Sample event handler
+      # every(1, :second, #{base}.MyEventHandler)
+    end
+    """
+
+    if File.exists?(@default_schedule_file) do
+      Mix.shell.info "Your schedule file already exists."
+    else
+      create_file(@default_schedule_file, schedule_value)
+      Mix.shell.info "Schedule file successfully created."
+    end
   end
 
   defp install_handlers do
-    Mix.shell.info "handlers"
+    handler_value = """
+    defmodule #{base}.MyEventHandler do
+      use ExClockwork.Handler
+
+      def run do
+        # do anything here
+      end
+    end
+    """
+
+    create_directory(@default_handlers_directory)
+    create_file(@default_handlers_directory <> "/" <> @sample_hander_file, handler_value)
   end
 
   defp install_config do
@@ -55,8 +83,8 @@ defmodule Mix.Tasks.ExClockwork.Install do
     if String.contains? source, @config_marker_start do
       Mix.shell.info "Your config file already contains ExClockwork configuration."
     else
-      Mix.shell.info "ExClockwork configuration is added to config/config.ex"
       File.write!(@config_file, source <> "\n" <> config_value)
+      Mix.shell.info "ExClockwork configuration is added to config/config.ex"
     end
   end
 
