@@ -22,36 +22,51 @@ Currently is under development.
     end
     ```
 
-  3. Configure `ex_clockwork` application, adding to `config/config.exs`:
-    ```elixir
-    config :ex_clockwork,
-      schedule: MyApp.Schedule,
-      interval: 1000
-    ```
-    where `schedule` is the module with your tasks definitions
+	3. Run generators to install sample schedule and handlers:
 
-  4. Add `schedule.ex` file to your application, with something like this content:
-    ```elixir
-    defmodule MyApp.Schedule do
-      use ExClockwork.Schedule
-      every(2, :second, MyApp.MyEventHandler)
-    end
-    ```
+	```elixir
+	mix ex_clockwork.install
+	```
 
-  5. Add `my_event_handler.ex` file to your app.
-    ```elixir
-    defmodule MyApp.MyEventHandler do
-      use ExClockwork.Handler
-      
-      def run do
-        # do anything here
-      end
-    end
-    ```
+	4. Configure `ex_clockwork` application, at config/config.exs:
+	```elixir
+	config :ex_clockwork,
+		schedule: ExBlog.Schedule,
+		interval: 1000
+	```
 
-    run method of this module will be invoked every 2 seconds, as defined in schedule
+	`schedule` - module with tasks definitions
+	`interval` - parameters sets tick interval, by default it is 1 second, so ex_clockwork will check every second if it has tasks to do.
+
+	5. Configure `schedule.ex` file to add your custom tasks:
+	```elixir
+		defmodule MyApp.Schedule do
+			use ExClockwork.Schedule
+
+			every(2, :second, MyApp.MyEventHandler)
+		end
+	```
+
+	first parameter - period of your task
+	second - measurement, e.g. `:second`, `:minute`, `:hour`
+	third - module name, that will be triggered when the period is finished
+
+	6. Customize `my_event_handler.ex` file or create a custom one with definition of work that will be done periodically:
+	```elixir
+		defmodule MyApp.MyEventHandler do
+			use ExClockwork.Handler
+
+			def run do
+				# do anything here
+			end
+		end
+	```
+
+	run method of this module will be invoked every 2 seconds, as defined in schedule
+>>>>>>> Update README
 
 
 ## TODO
 	* Add examples
-	* Add some kind of generators, to install sample schedule and handler, to prevent extra work from user
+	* Add tests
+	* Add moduledocs
