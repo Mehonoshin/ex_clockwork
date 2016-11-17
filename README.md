@@ -51,7 +51,7 @@ Currently is under development.
     second - measurement, e.g. `:second`, `:minute`, `:hour`
     third - module name, that will be triggered when the period is finished
 
-    6. Customize `my_event_handler.ex` file or create a custom one with definition of work that will be done periodically:
+  6. Customize `my_event_handler.ex` file or create a custom one with definition of work that will be done periodically:
     ```elixir
     defmodule MyApp.MyEventHandler do
       use ExClockwork.Handler
