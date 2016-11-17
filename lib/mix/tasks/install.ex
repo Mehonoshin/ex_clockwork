@@ -10,6 +10,8 @@ defmodule Mix.Tasks.ExClockwork.Install do
   @config_marker_start "%% ExClockwork Configuration %%"
   @config_marker_end   "%% End ExClockwork Configuration %%"
 
+  @config_file "config/config.exs"
+
   def run(args) do
     args
     |> prepare_options
@@ -41,6 +43,28 @@ defmodule Mix.Tasks.ExClockwork.Install do
   end
 
   defp install_config do
-    Mix.shell.info "config"
+    config_value = """
+    # #{@config_marker_start}   Don't remove this line
+    config :ex_clockwork,
+      schedule: #{base}.Schedule,
+      interval: 1000
+    # #{@config_marker_end}   Don't remove this line
+    """
+
+    source = File.read!(@config_file)
+    if String.contains? source, @config_marker_start do
+      Mix.shell.info "Your config file already contains ExClockwork configuration."
+    else
+      Mix.shell.info "ExClockwork configuration is added to config/config.ex"
+      File.write!(@config_file, source <> "\n" <> config_value)
+    end
+  end
+
+  defp base do
+    binding = Mix.Project.config
+    |> Keyword.fetch!(:app)
+    |> Atom.to_string
+    |> Mix.Phoenix.inflect
+    binding[:base]
   end
 end
