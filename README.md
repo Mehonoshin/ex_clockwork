@@ -29,16 +29,18 @@ Currently is under development.
     ```
 
   4. Configure `ex_clockwork` application, at config/config.exs:
+  
     ```elixir
     config :ex_clockwork,
       schedule: ExBlog.Schedule,
       interval: 1000
     ```
 
-    `schedule` - module with tasks definitions
-    `interval` - parameters sets tick interval, by default it is 1 second, so ex_clockwork will check every second if it has tasks to do.
+  `schedule` - module with tasks definitions
+  `interval` - parameters sets tick interval, by default it is 1 second, so ex_clockwork will check every second if it has tasks to do.
 
   5. Configure `schedule.ex` file to add your custom tasks:
+  
     ```elixir
     defmodule MyApp.Schedule do
       use ExClockwork.Schedule
@@ -47,11 +49,12 @@ Currently is under development.
     end
     ```
 
-    first parameter - period of your task
-    second - measurement, e.g. `:second`, `:minute`, `:hour`
-    third - module name, that will be triggered when the period is finished
+  first parameter - period of your task
+  second - measurement, e.g. `:second`, `:minute`, `:hour`
+  third - module name, that will be triggered when the period is finished
 
   6. Customize `my_event_handler.ex` file or create a custom one with definition of work that will be done periodically:
+  
     ```elixir
     defmodule MyApp.MyEventHandler do
       use ExClockwork.Handler
@@ -62,7 +65,7 @@ Currently is under development.
     end
     ```
 
-    run method of this module will be invoked every 2 seconds, as defined in schedule
+  run method of this module will be invoked every 2 seconds, as defined in schedule
 
 
 ## TODO
