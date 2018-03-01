@@ -29,11 +29,11 @@ end
 
   4. Configure `ex_clockwork` application, at config/config.exs:
   
-    ```elixir
+```elixir
     config :ex_clockwork,
       schedule: ExBlog.Schedule,
       interval: 1000
-    ```
+```
 
   `schedule` - module with tasks definitions
   `interval` - parameters sets tick interval, by default it is 1 second, so ex_clockwork will check every second if it has tasks to do.
